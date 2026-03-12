@@ -329,7 +329,7 @@ function outDivForm() {
     }
     
     // Выводим информацию и текущую дату/время
-    echo '<p>' . $s . date('d.m.Y H:i:s') . '</p>';
+    echo '<p>' . $s . date('d.m.Y H:i:s', strtotime('+3 hours')) . '</p>';
     ?>
 </div>
 
