@@ -79,36 +79,32 @@
         }
     </style>
     <script>
-        function setHTML(element, txt)
-        {
-            if(element.innerHTML !== undefined)
+        function setHTML(element, txt) {
+            if (element.innerHTML !== undefined) {
                 element.innerHTML = txt;
-            else
-            {
-                var range = document.createRange();
+            } else {
+                const range = document.createRange();
                 range.selectNodeContents(element);
                 range.deleteContents();
-                var fragment = range.createContextualFragment(txt);
+                const fragment = range.createContextualFragment(txt);
                 element.appendChild(fragment);
             }
         }
 
-        function addElement()
-        {
-            var t = document.getElementById('elements');
-            var index = t.rows.length;
-            var row = t.insertRow(index);
+        function addElement() {
+            const t = document.getElementById('elements');
+            const index = t.rows.length;
+            const row = t.insertRow(index);
 
             // Ячейка с номером элемента
-            var celIndex = row.insertCell(0);
+            const celIndex = row.insertCell(0);
             celIndex.className = 'index_cell';
-            setHTML(celIndex, index + ':');
+            setHTML(celIndex, `${index}:`);
 
             // Ячейка с полем ввода
-            var cel = row.insertCell(1);
+            const cel = row.insertCell(1);
             cel.className = 'element_row';
-            var celcontent = '<input type="text" name="element' + index + '">';
-            setHTML(cel, celcontent);
+            setHTML(cel, `<input type="text" name="element${index}">`);
 
             // Обновляем количество полей в скрытом поле
             document.getElementById('arrLength').value = t.rows.length;
