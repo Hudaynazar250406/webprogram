@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-
   mysql:
     image: mysql:8.0
     container_name: lr9_mysql
@@ -12,7 +9,7 @@ services:
       MYSQL_USER: friends_user
       MYSQL_PASSWORD: friends_pass
     volumes:
-      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - mysql_data:/var/lib/mysql
     ports:
       - "3306:3306"
@@ -20,21 +17,26 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   php:
-    build:
-      context: ./php
-      dockerfile: Dockerfile
+    image: php:8.2-apache
     container_name: lr9_php
     restart: unless-stopped
-    ports:
-      - "8080:80"
     depends_on:
       mysql:
         condition: service_healthy
     environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: friends
+      DB_USER: friends_user
+      DB_PASS: friends_pass
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    command: /bin/bash -lc "docker-php-ext-install mysqli pdo pdo_mysql && apache2-foreground"
 
 volumes:
   mysql_data:

@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS friends
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE friends;
+
+DROP TABLE IF EXISTS contacts;
+
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    surname VARCHAR(100) NOT NULL,
+    firstname VARCHAR(100) NOT NULL,
+    patronymic VARCHAR(100) DEFAULT '',
+    gender VARCHAR(10) NOT NULL DEFAULT 'М',
+    birthdate DATE DEFAULT NULL,
+    phone VARCHAR(50) DEFAULT '',
+    address VARCHAR(255) DEFAULT '',
+    email VARCHAR(150) DEFAULT '',
+    comment TEXT DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
