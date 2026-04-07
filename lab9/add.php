@@ -71,7 +71,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'add_contact') {
         </select>
 
         <input type="date" name="birthdate" value="<?= htmlspecialchars($_POST['birthdate'] ?? '') ?>">
-        <input type="text" name="phone" placeholder="Телефон" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
+        <input type="phone" name="phone" placeholder="Телефон" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
         <input type="text" name="address" placeholder="Адрес" value="<?= htmlspecialchars($_POST['address'] ?? '') ?>">
         <input type="email" name="email" placeholder="E-mail" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
         <textarea name="comment" placeholder="Комментарий"><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
